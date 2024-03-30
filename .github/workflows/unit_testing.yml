@@ -38,7 +38,7 @@ jobs:
       - name: Automatically create PR to master
         uses: repo-sync/pull-request@v2
         with:
-          destination_branch: "master"
+          destination_branch: "main"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Auto PR: Merge test to master"
           pr_body: "Automatically created PR to merge changes from test to master."
