@@ -4,9 +4,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.impute import SimpleImputer
-from sklearn.metrics import accuracy_score, \
-    classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from joblib import dump
 
 # Load the dataset
@@ -21,34 +19,28 @@ print(data.isnull().sum())
 print(data.info())
 print(data.describe())
 
-data['Monthly Income'] = pd.to_numeric(data['Monthly Income'], errors='coerce')
+# Drop the 'Monthly Income' column
+data.drop(columns=['Monthly Income'], inplace=True)
 
-# Check for missing values in 'Monthly Income' column after conversion
-print("Missing values after conversion:")
-print(data['Monthly Income'].isnull().sum())
-
-# Apply imputation
-imputer = SimpleImputer(strategy='median')
-data['Monthly Income'] = imputer.fit_transform(data[['Monthly Income']])
+# Apply LabelEncoder to categorical columns
 label_encoder = LabelEncoder()
-for column in ['Gender', 'Marital Status', 'Occupation',
-'Educational Qualifications', 'Output']:
+for column in ['Gender', 'Marital Status', 'Occupation', 'Educational Qualifications', 'Output']:
     data[column] = label_encoder.fit_transform(data[column])
 
-# Drop irrelevant columns
-data.drop(columns=['Feedback', 'Unnamed: 12'],
-        inplace=True)
+# Drop other irrelevant columns
+data.drop(columns=['Feedback', 'Unnamed: 12'], inplace=True)
 
 # Prepare data for modeling
 X = data.drop(columns=['Output'])
 y = data['Output']
-X_train, X_test, y_train, y_test = \
-    train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train and evaluate the Random Forest classifier
 rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
 rf_classifier.fit(X_train, y_train)
 y_pred = rf_classifier.predict(X_test)
+
+# Results
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 conf_matrix = confusion_matrix(y_test, y_pred)
@@ -57,8 +49,8 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix')
 plt.show()
+
 # Save the model
 model_filename = 'rf_classifier.joblib'
-
 dump(rf_classifier, model_filename)
 print(f"Model saved to {model_filename}")

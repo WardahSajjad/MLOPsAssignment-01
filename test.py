@@ -1,9 +1,5 @@
 import unittest
-from unittest.mock import patch
-import pandas as pd
-from onlinefood import preprocessing_pipeline
 from app import app
-
 
 class TestFlaskApp(unittest.TestCase):
 
@@ -17,7 +13,6 @@ class TestFlaskApp(unittest.TestCase):
             'Gender': 0,
             'Marital Status': 1,
             'Occupation': 2,
-            'Monthly Income': 3000,
             'Educational Qualifications': 3,
             'Family size': 4,
             'latitude': 12.9716,
@@ -34,7 +29,6 @@ class TestFlaskApp(unittest.TestCase):
             'Age': 25,
             'Gender': 0,
             'Occupation': 2,
-            'Monthly Income': 3000,
             'Educational Qualifications': 3,
             'Family size': 4,
             'latitude': 12.9716,
@@ -52,7 +46,6 @@ class TestFlaskApp(unittest.TestCase):
             'Gender': 0,
             'Marital Status': 1,
             'Occupation': 2,
-            'Monthly Income': 3000,
             'Educational Qualifications': 3,
             'Family size': 4,
             'latitude': 12.9716,
@@ -60,10 +53,8 @@ class TestFlaskApp(unittest.TestCase):
             'Pin code': 560001
         }
         response = self.app.post('/predict', json=data)
-        self.assertNotEqual(response.status_code, 
-        200)
+        self.assertNotEqual(response.status_code, 200)
         print("Test 'test_invalid_value_type' passed successfully!\n")
-
 
 if __name__ == '__main__':
     unittest.main()
