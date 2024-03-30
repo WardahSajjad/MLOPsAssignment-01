@@ -26,13 +26,13 @@ data['Monthly Income'] = pd.to_numeric(data['Monthly Income'], errors='coerce')
 imputer = SimpleImputer(strategy='median')
 data['Monthly Income'] = imputer.fit_transform(data[['Monthly Income']])
 label_encoder = LabelEncoder()
-for column in ['Gender', 'Marital Status', 'Occupation', \
-            'Educational Qualifications', 'Output']:
+for column in ['Gender', 'Marital Status', 'Occupation',
+'Educational Qualifications', 'Output']:
     data[column] = label_encoder.fit_transform(data[column])
 
 # Drop irrelevant columns
-data.drop(columns=['Feedback', 'Unnamed: 12'], 
-          inplace=True)
+data.drop(columns=['Feedback', 'Unnamed: 12'],
+        inplace=True)
 
 # Prepare data for modeling
 X = data.drop(columns=['Output'])
