@@ -5,8 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
-# Consolidate imports from sklearn.metrics to a single line within the recommended length
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, \
+    classification_report, confusion_matrix
 from joblib import dump
 
 # Load the dataset
@@ -26,16 +26,19 @@ data['Monthly Income'] = pd.to_numeric(data['Monthly Income'], errors='coerce')
 imputer = SimpleImputer(strategy='median')
 data['Monthly Income'] = imputer.fit_transform(data[['Monthly Income']])
 label_encoder = LabelEncoder()
-for column in ['Gender', 'Marital Status', 'Occupation', 'Educational Qualifications', 'Output']:
+for column in ['Gender', 'Marital Status', 'Occupation', \
+            'Educational Qualifications', 'Output']:
     data[column] = label_encoder.fit_transform(data[column])
 
 # Drop irrelevant columns
-data.drop(columns=['Feedback', 'Unnamed: 12'], inplace=True)
+data.drop(columns=['Feedback', 'Unnamed: 12'], 
+          inplace=True)
 
 # Prepare data for modeling
 X = data.drop(columns=['Output'])
 y = data['Output']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = \
+    train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train and evaluate the Random Forest classifier
 rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
@@ -49,8 +52,8 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix')
 plt.show()
-
 # Save the model
 model_filename = 'rf_classifier.joblib'
+
 dump(rf_classifier, model_filename)
 print(f"Model saved to {model_filename}")

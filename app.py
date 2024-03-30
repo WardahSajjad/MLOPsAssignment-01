@@ -47,7 +47,8 @@ def predict():
     ]
     
     if missing_features:
-        return jsonify({'error': 'Missing features: ' + ', '.join(missing_features)}), 400
+        return jsonify({'error': 'Missing features: ' + 
+                        ', '.join(missing_features)}), 400
 
     valid, error_message = is_valid_type(data)
     if not valid:

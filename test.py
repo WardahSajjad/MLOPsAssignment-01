@@ -57,7 +57,8 @@ class TestFlaskApp(unittest.TestCase):
             'Pin code': 560001
         }
         response = self.app.post('/predict', json=data)
-        self.assertNotEqual(response.status_code, 200)
+        self.assertNotEqual(response.status_code, 
+                            200)
         print("Test 'test_invalid_value_type' passed successfully!\n")
 
 
