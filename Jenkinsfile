@@ -17,10 +17,10 @@ pipeline {
         }
 
     stages {
-        stage('Checkout') {
+        stage('Cloning Git Repository') {
             steps {
-                // Checkout source code from the SCM
-                checkout scm
+                // Assuming you want to checkout from Git; adjust as necessary
+                git branch: 'main', url: 'https://github.com/WardahSajjad/MLOPsAssignment-01'
             }
         }
 
