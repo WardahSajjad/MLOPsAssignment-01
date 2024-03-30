@@ -1,9 +1,13 @@
 name: Unit Testing
 
 on:
+  push:
+    branches:
+      - testing
   pull_request:
     branches:
-      - test
+      - testing
+
 
 jobs:
   unit-tests:
