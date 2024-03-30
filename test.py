@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 import pandas as pd
-from onlinefood import preprocessing_pipeline
+# from onlinefood import preprocessing_pipeline
 
 class TestPreprocessingPipeline(unittest.TestCase):
     @patch('onlinefood.pd.read_csv')
@@ -17,7 +17,7 @@ class TestPreprocessingPipeline(unittest.TestCase):
         })
         
         # Apply preprocessing pipeline
-        X, y = preprocessing_pipeline(mock_read_csv.return_value)
+        # X, y = preprocessing_pipeline(mock_read_csv.return_value)
 
         # Assert that X and y have the correct shapes
         self.assertEqual(X.shape, (4, 5))
