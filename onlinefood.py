@@ -9,9 +9,14 @@ from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from joblib import dump
 
+from sklearn.metrics import accuracy_score, \
+    classification_report, confusion_matrix
 # import joblib
 # Load the dataset
 data = pd.read_csv("onlinefoods.csv")
+# why is workflow did not triggerrr?????
+# try try again
+# one more time
 
 print(data.head())
 
@@ -34,7 +39,8 @@ label_encoder = LabelEncoder()
 data['Gender'] = label_encoder.fit_transform(data['Gender'])
 data['Marital Status'] = label_encoder.fit_transform(data['Marital Status'])
 data['Occupation'] = label_encoder.fit_transform(data['Occupation'])
-data['Educational Qualifications'] = label_encoder.fit_transform(data['Educational Qualifications'])
+data['Educational Qualifications'] = \
+    label_encoder.fit_transform(data['Educational Qualifications'])
 data['Output'] = label_encoder.fit_transform(data['Output'])
 
 # Drop irrelevant columns
@@ -45,7 +51,8 @@ X = data.drop(columns=['Output'])
 y = data['Output']
 
 # Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = \
+    train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train Random Forest classifier
 rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
