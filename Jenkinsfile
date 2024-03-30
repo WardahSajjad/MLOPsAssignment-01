@@ -36,15 +36,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Cleanup') {
-            steps {
-                script {
-                    // Optional: Clean up the built image from the Jenkins agent
-                    sh "docker rmi ${IMAGE_NAME}:${TAG}"
-                }
-            }
-        }
     }
 
     post {
