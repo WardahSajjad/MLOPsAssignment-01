@@ -29,6 +29,11 @@ def is_valid_type(data):
     
     return True, ""
 
+
+@app.route('/')
+def hello_world():
+    return jsonify(message="Hello, MLops!")
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
