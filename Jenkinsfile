@@ -8,6 +8,13 @@ pipeline {
         TAG = 'latest'
     }
 
+    agent any
+    stages {
+        stage('Cloning Git Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/WardahSajjad/MLOPsAssignment-01'
+            }
+        }
     stages {
         stage('Checkout') {
             steps {
