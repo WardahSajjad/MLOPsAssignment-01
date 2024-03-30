@@ -25,8 +25,7 @@ print(data.info())
 print(data.describe())
 
 # Replace non-numeric values in "Monthly Income" with NaN
-data['Monthly Income'] = pd.to_numeric(data['Monthly Income'], \
-                                       errors='coerce')
+data['Monthly Income'] = pd.to_numeric(data['Monthly Income'],errors='coerce')
 
 # Impute missing values with median
 imputer = SimpleImputer(strategy='median')
@@ -37,7 +36,7 @@ label_encoder = LabelEncoder()
 data['Gender'] = label_encoder.fit_transform(data['Gender'])
 data['Marital Status'] = label_encoder.fit_transform(data['Marital Status'])
 data['Occupation'] = label_encoder.fit_transform \
-    (data['Occupation'])
+(data['Occupation'])
 data['Educational Qualifications'] = \
       label_encoder.fit_transform(data['Educational Qualifications'])
 data['Output'] = label_encoder.fit_transform(data['Output'])
