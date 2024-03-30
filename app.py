@@ -23,9 +23,9 @@ def is_valid_type(data):
     }
     if incorrect_types:
         error_message = ', '.join([
-            f'{feature} should be {expected_types[feature]},
-            got {value_type.__name__}'
-            for feature, value_type in incorrect_types.items()
+        f'{feature} should be {expected_types[feature]},
+        got {value_type.__name__}'
+        for feature, value_type in incorrect_types.items()
         ])
         return False, error_message
     return True, ""
