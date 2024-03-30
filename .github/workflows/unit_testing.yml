@@ -1,4 +1,4 @@
-name: Unit Testing
+name: Unit Tests and Auto PR to Master
 
 on:
   pull_request:
@@ -6,21 +6,38 @@ on:
       - test
 
 jobs:
-  unit-tests:
-    name: Run Unit Tests
+  run-tests:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
+      - uses: actions/checkout@v2
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
-      
+          python-version: '3.8'
+
       - name: Install dependencies
-        run: pip install -r requirements.txt
-      
-      - name: Run unit tests
-        run: python -m unittest discover -s . -p 'test*.py'
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          python -m unittest test.py
+        env:
+          FLASK_ENV: testing
+
+  auto-pr-to-master:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Automatically create PR to master
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "master"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "Auto PR: Merge test to master"
+          pr_body: "Automatically created PR to merge changes from test to master."
+          pr_label: "automerge"

@@ -7,6 +7,8 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from joblib import dump
+
 # import joblib
 # Load the dataset
 data = pd.read_csv("onlinefoods.csv")
@@ -66,3 +68,8 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix')
 plt.show()
+
+# Save the model to a file
+model_filename = 'rf_classifier.joblib'
+dump(rf_classifier, model_filename)
+print(f"Model saved to {model_filename}")
