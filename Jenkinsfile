@@ -8,18 +8,11 @@ pipeline {
         TAG = 'latest'
     }
 
-    agent any
     stages {
         stage('Cloning Git Repository') {
             steps {
+                // Assuming you want to checkout from Git; adjust as necessary
                 git branch: 'main', url: 'https://github.com/WardahSajjad/MLOPsAssignment-01'
-            }
-        }
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from the SCM
-                checkout scm
             }
         }
 
