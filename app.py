@@ -10,7 +10,7 @@ def is_valid_type(data):
         'Gender': int,
         'Marital Status': int,
         'Occupation': int,
-        'Monthly Income': int,
+        # 'Monthly Income': int,
         'Educational Qualifications': int,
         'Family size': int,
         'latitude': float,
@@ -36,7 +36,7 @@ def predict():
     data = request.get_json()
     
     required_features = [
-    'Age', 'Gender', 'Marital Status', 'Occupation', 'Monthly Income',
+    'Age', 'Gender', 'Marital Status', 'Occupation',
     'Educational Qualifications', 'Family size', 'latitude', 'longitude', 'Pin code'
     ]
     missing_features = [

@@ -21,8 +21,13 @@ print(data.isnull().sum())
 print(data.info())
 print(data.describe())
 
-# Preprocessing steps
 data['Monthly Income'] = pd.to_numeric(data['Monthly Income'], errors='coerce')
+
+# Check for missing values in 'Monthly Income' column after conversion
+print("Missing values after conversion:")
+print(data['Monthly Income'].isnull().sum())
+
+# Apply imputation
 imputer = SimpleImputer(strategy='median')
 data['Monthly Income'] = imputer.fit_transform(data[['Monthly Income']])
 label_encoder = LabelEncoder()
