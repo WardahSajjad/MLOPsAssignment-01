@@ -1,20 +1,12 @@
 pipeline {
     agent any
-// checking jenkins pipeline
+
     environment {
         // Define environment variables
         DOCKERHUB_CREDENTIALS_ID = 'dockerCredentials-101'
         IMAGE_NAME = 'wardasajjad/mlops-assignment-01'
         TAG = 'latest'
     }
-
-    agent any
-    stages {
-        stage('Cloning Git Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/WardahSajjad/MLOPsAssignment-01'
-            }
-        }
 
     stages {
         stage('Cloning Git Repository') {
